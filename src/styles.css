@@ -4,6 +4,8 @@ html, body, .app-container {
     padding: 0;
 }
 
+header,
+app-layout-header,
 app-layout-footer{
     background-color: rgb(159,181,143);
 }

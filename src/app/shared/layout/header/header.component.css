@@ -1,0 +1,32 @@
+header{
+    position: absolute;
+    width: 100%;
+
+}
+header{
+    height: 60px;
+    top: 0px;
+}
+
+
+.logo{
+    height: 100%;
+    margin:auto
+}
+.menu{
+    position: absolute;
+    margin-top: auto;
+    margin-bottom: auto;
+    right: 0px;
+    top: 1vh;
+}
+
+.menu a{
+    font-size:x-large;
+    text-decoration: none;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    position: relative;
+    bottom: auto;
+    margin-right: 3vw;
+}

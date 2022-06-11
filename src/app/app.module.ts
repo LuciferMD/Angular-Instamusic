@@ -10,7 +10,8 @@ import { ActiveComponent } from './active/active.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SearchComponent } from './search/search.component';
 import {
-  FooterComponent
+  FooterComponent,
+  HeaderComponent
 } from './shared';
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
     ActiveComponent,
     NotFoundComponent,
     SearchComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
