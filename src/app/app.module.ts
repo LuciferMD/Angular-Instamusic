@@ -9,7 +9,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ActiveComponent } from './active/active.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SearchComponent } from './search/search.component';
-
+import {
+  FooterComponent
+} from './shared';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,7 +33,8 @@ const routes: Routes = [
     ProfileComponent,
     ActiveComponent,
     NotFoundComponent,
-    SearchComponent
+    SearchComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
