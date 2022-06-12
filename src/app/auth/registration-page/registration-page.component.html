@@ -1,1 +1,53 @@
-<p>registration-page works!</p>
+<body class="Back">
+    <div class="registration">
+     <!-- Form container -->
+     <div class="registration__container">
+        <form id="form" class="form">
+            <h2>Create Account</h2> 
+          <!-- Login input -->
+          <div class="form-input">
+            <label for="login">Login</label>
+            <input
+            placeholder="Логин"
+              type="text"
+              id="login"
+              name="login"
+          
+            />
+            <small>Error message</small>
+          </div>
+
+          <!-- E-mail input -->
+          <div class="form-input">
+            <label for="email">E-mail</label>
+            <input type="text" id="email" placeholder="E-mail" />
+            <small>Error message</small>
+          </div>
+
+
+          <!-- Password input -->
+          <div class="form-input">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password"/>
+            <small>Error message</small>
+          </div>
+
+
+          <!-- Password confirmation input -->
+          <div class="form-input">
+            <label for="passwordConfirm">Password confirm</label>
+            <input type="password" id="password-confirm" name="passwordConfirm" placeholder="Password confirm" />
+            <small>Error message</small>
+          </div>
+          
+          <a routerLink="/login" class="container__text" ><h4>Have account? Sign in!</h4></a>
+
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+       
+    </div>
+
+    <!-- JavaScript -->
+    <!-- <script src="../js/regScript.js"></script> -->
+</body>

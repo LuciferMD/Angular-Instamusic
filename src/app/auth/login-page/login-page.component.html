@@ -1,47 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body class="logBack">
-    <div class="login__preface"><h3>Hi bro. <br>Nice to meet you</h3></div>
-    <div class="login">
-        <!-- Form container -->
-        <div class="registration__container">
-           <form id="form" class="form">
-             <!-- Login input -->
-             <div class="form-input">
-               <label for="login">Login</label>
-               <input
-               placeholder="Логин"
-                 type="text"
-                 id="login"
-                 name="login"
-             
-               />
-               <small>Error message</small>
-             </div>
-   
-             <!-- Password input -->
-             <div class="form-input">
-               <label for="password">Password</label>
-               <input type="password" id="password" name="password" placeholder="Password"/>
-               <small>Error message</small>
-             </div>
-             
-             <a href="./registration.html" class="container__text" ><h6>Haven't account? Create it!</h6></a>
-      
-             <button type="submit">Sign up</button>
-           </form>
-         </div>
-          
-       </div>
-   
-       <!-- JavaScript -->
+<body class="Back">
+  <div class="login__preface"><h2>Hi bro. <br>Nice to meet you</h2></div>
+  <div class="login">
+      <!-- Form container -->
+      <div class="registration__container">
+         <form id="form" class="form" [formGroup]="form" (ngSubmit)="onSubmit()" >
+           <!-- Login input -->
+           <div class="form-input">
+             <label for="login">Login</label>
+             <input
+              formControlName="login"
+              placeholder="Логин"
+              type="text"
+              id="login"
+              name="login"
+           
+             />
+             <span 
+             class ="helper-text" style="color:red ;"
+             *ngIf="form.get('login').invalid && form.get('login').touched">
+              <span *ngIf="form.get('login').errors['required']" >login empty</span>
+              <span *ngIf="form.get('login').errors['minlength'] && form.get('login').errors['minlength']['requiredLength']">login must be more 5</span>                    
+          </span>
+           </div>
+ 
+           <!-- Password input -->
+           <div class="form-input">
+             <label for="password">Password</label>
+             <input 
+             formControlName="password"
+             type="password" 
+             id="password" 
+             name="password" 
+             placeholder="Password"/>
+             <span 
+             class ="helper-text" style="color:red ;"
+             *ngIf="form.get('password').invalid && form.get('password').touched">
+
+            <span *ngIf="form.get('password').errors['required']" >password empty</span>
+            <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">password must be more 5</span>                    
+          </span>
+           </div>
+           
+           <a routerLink="/reg" class="container__text" ><h4>Haven't account? Create it!</h4></a>
     
+           <button 
+           type="submit" 
+           [disabled]="form.invalid"
+           >Sign up</button>
+         </form>
+       </div>
+        
+     </div>
 
 </body>
-</html>
