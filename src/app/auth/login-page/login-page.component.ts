@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/shared/interfaces/user.interface';
+import { AuthService } from 'src/app/shared/services/auth-service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,19 +11,22 @@ export class LoginPageComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() {
+   constructor(private auth:AuthService) {
+    }
+
+  ngOnInit(): void {
     this.form = new FormGroup({
       login: new FormControl(null,[Validators.required, Validators.minLength(5)]),
       password: new FormControl(null, [Validators.required,Validators.minLength(5)])
     });
   }
 
-  ngOnInit(): void {
-    
-  }
-
   onSubmit(){
-
+    this.auth.login(this.form.value.login,this.form.value.password).subscribe(
+      ()=>console.log('Login succes'),
+      error => {console.warn(error);
+      }
+    )
   }
 
 }

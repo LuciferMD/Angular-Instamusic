@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { RegistrationPageComponent } from './auth/registration-page/registration-page.component';
 import { HomeComponent } from './home/home.component';
@@ -16,17 +17,10 @@ import {
 } from './shared';
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/site-layout/site-layout.component';
-import { HttpClientModule } from '@angular/common/http';
+import { ConfigService } from './shared/services/config.service';
 
+export const APP_INITIALIZER = new InjectionToken<Array<() => void>>('Application Initializer');
 
-// const routes: Routes = [
-  // { path: '', component: HomeComponent },
-  // { path: 'active', component: ActiveComponent },
-  // { path: 'search', component: SearchComponent },
-  // { path: 'profile', component: ProfileComponent },
-  // { path: '**', component: NotFoundComponent },
-  
-// ]
 
 const routes: Routes = [
   {path: '',component: AuthLayoutComponent, children: [
@@ -35,7 +29,7 @@ const routes: Routes = [
     {path: 'reg', component: RegistrationPageComponent}
   ]},
   {path: '',component: SiteLayoutComponent , children: [
-    { path: '', redirectTo: '/acttive', pathMatch:'full'},
+    //{ path: '', redirectTo: '/acttive', pathMatch:'full'},
     { path: 'home', component: HomeComponent },
     { path: 'search', component: SearchComponent },
     { path: 'profile', component: ProfileComponent },
@@ -65,7 +59,17 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+		ConfigService,
+		{
+			provide: APP_INITIALIZER,
+			useFactory: (conf: ConfigService) => {
+				return () => conf.load();
+			},
+			deps: [ConfigService],
+			multi: true
+		}
+	],
   bootstrap: [AppComponent]
 })
 
