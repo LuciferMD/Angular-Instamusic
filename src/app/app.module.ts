@@ -18,8 +18,10 @@ import {
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/site-layout/site-layout.component';
 import { ConfigService } from './shared/services/config.service';
+import { ApiService } from './shared/services/api.service';
+import { AuthService } from './shared/services/auth-service';
+import { APP_INITIALIZER } from '@angular/core';
 
-export const APP_INITIALIZER = new InjectionToken<Array<() => void>>('Application Initializer');
 
 
 const routes: Routes = [
@@ -61,6 +63,8 @@ const routes: Routes = [
   ],
   providers: [
 		ConfigService,
+    ApiService,
+    AuthService,
 		{
 			provide: APP_INITIALIZER,
 			useFactory: (conf: ConfigService) => {

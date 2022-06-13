@@ -5,7 +5,9 @@ import { ConfigService } from "./config.service";
 
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ApiService {
 	apiUrl!: string;
     
