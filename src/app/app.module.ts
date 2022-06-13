@@ -1,4 +1,4 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { InjectionToken, NgModule,APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,7 +20,7 @@ import { SiteLayoutComponent } from './shared/site-layout/site-layout.component'
 import { ConfigService } from './shared/services/config.service';
 import { ApiService } from './shared/services/api.service';
 import { AuthService } from './shared/services/auth-service';
-import { APP_INITIALIZER } from '@angular/core';
+
 
 
 

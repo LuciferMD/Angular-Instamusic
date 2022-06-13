@@ -7,7 +7,7 @@ export class ConfigService {
     constructor(private http: HttpClient) {}
 
 	async load() {
-        const jsonFile = `assets\app-settings.json`;
+        const jsonFile =`assets/config.dev.json`;
         return new Promise<void>((resolve, reject) => {
             this.http.get(jsonFile).toPromise().then((response: any) => {
                this.settings = response;
