@@ -1,53 +1,55 @@
 <body class="Back">
-    <div class="registration">
-     <!-- Form container -->
-     <div class="registration__container">
-        <form id="form" class="form">
-            <h2>Create Account</h2> 
-          <!-- Login input -->
-          <div class="form-input">
-            <label for="login">Login</label>
-            <input
-            placeholder="Логин"
-              type="text"
-              id="login"
-              name="login"
-          
-            />
-            <small>Error message</small>
-          </div>
 
-          <!-- E-mail input -->
-          <div class="form-input">
-            <label for="email">E-mail</label>
-            <input type="text" id="email" placeholder="E-mail" />
-            <small>Error message</small>
-          </div>
+  <div class="login">
+    <!-- Form container -->
+    <div class="registration__container">
+      <form id="form" class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h2>Create Account</h2>
+        <div class="form-input">
+          <label for="login">Login</label>
+          <input formControlName="login" placeholder="Логин" type="text" id="login" name="login" />
+          <span class="helper-text" style="color:red ;" *ngIf="form.get('login').invalid && form.get('login').touched">
+            <span *ngIf="form.get('login').errors['required']">login empty</span>
+            <span
+              *ngIf="form.get('login').errors['minlength'] && form.get('login').errors['minlength']['requiredLength']">login
+              must be more 5</span>
+          </span>
+        </div>
 
+        <!-- Email -->
+        <div class="form-input">
+          <label for="login">Email</label>
+          <input formControlName="email" placeholder="Email" type="text" id="email" name="email" />
+          <span class="helper-text" style="color:red ;" *ngIf="form.get('email').invalid && form.get('email').touched">
+            <span *ngIf="form.get('email').errors['required']">Email empty</span>
+            <span
+              *ngIf="form.get('email').errors['email'] ">Unreal email</span>
+              
+          </span>
+        </div>
 
-          <!-- Password input -->
-          <div class="form-input">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Password"/>
-            <small>Error message</small>
-          </div>
+        <!-- Password input -->
+        <div class="form-input">
+          <label for="password">Password</label>
+          <input formControlName="password" type="password" id="password" name="password" placeholder="Password" />
+          <span class="helper-text" style="color:red ;"
+            *ngIf="form.get('password').invalid && form.get('password').touched">
 
+            <span *ngIf="form.get('password').errors['required']">password empty</span>
+            <span
+              *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">password
+              must be more 5</span>
+          </span>
+        </div>
 
-          <!-- Password confirmation input -->
-          <div class="form-input">
-            <label for="passwordConfirm">Password confirm</label>
-            <input type="password" id="password-confirm" name="passwordConfirm" placeholder="Password confirm" />
-            <small>Error message</small>
-          </div>
-          
-          <a routerLink="/login" class="container__text" ><h4>Have account? Sign in!</h4></a>
+        <a routerLink="/login" class="container__text">
+          <h4>Have account? Sign in!</h4>
+        </a>
 
-          <button type="submit">Sign up</button>
-        </form>
-      </div>
-       
+        <button type="submit" [disabled]="form.invalid || form.disabled">Sign in</button>
+      </form>
     </div>
 
-    <!-- JavaScript -->
-    <!-- <script src="../js/regScript.js"></script> -->
+  </div>
+
 </body>

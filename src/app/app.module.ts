@@ -3,8 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
+import {TokenInterceptor} from './shared/classes/token.interceptor';
 import { RegistrationPageComponent } from './auth/registration-page/registration-page.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -19,7 +20,7 @@ import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component'
 import { SiteLayoutComponent } from './shared/site-layout/site-layout.component';
 import { ConfigService } from './shared/services/config.service';
 import { AuthService } from './shared/services/auth-service';
-
+import { AuthGuard } from './shared/classes/auth.guard';
 
 
 
@@ -29,8 +30,8 @@ const routes: Routes = [
     {path: 'login', component: LoginPageComponent},
     {path: 'reg', component: RegistrationPageComponent}
   ]},
-  {path: '',component: SiteLayoutComponent , children: [
-    //{ path: '', redirectTo: '/acttive', pathMatch:'full'},
+  {path: '',component: SiteLayoutComponent ,canActivate: [AuthGuard], children: [
+    { path: 'active', component : ActiveComponent},
     { path: 'home', component: HomeComponent },
     { path: 'search', component: SearchComponent },
     { path: 'profile', component: ProfileComponent },
@@ -61,16 +62,23 @@ const routes: Routes = [
     HttpClientModule
   ],
   providers: [
+    
 		ConfigService,
-    AuthService,
+    AuthService,  
 		{
-			provide: APP_INITIALIZER,
+			provide: APP_INITIALIZER,      // for set server url 
 			useFactory: (conf: ConfigService) => {
 				return () => conf.load();
 			},
 			deps: [ConfigService],
 			multi: true
-		}
+		},
+    {
+      provide:HTTP_INTERCEPTORS,   //for add token auth
+      multi:true,
+      useClass: TokenInterceptor
+    }
+    
 	],
   bootstrap: [AppComponent]
 })

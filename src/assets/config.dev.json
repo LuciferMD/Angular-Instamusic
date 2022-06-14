@@ -1,5 +1,5 @@
 {
     "api" : {
-    "cookbook-backend" : "http://localhost:3000/"
+        "cookbook-backend" : "http://localhost:3000/"
     }
 }
