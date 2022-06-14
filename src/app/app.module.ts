@@ -31,7 +31,7 @@ const routes: Routes = [
     {path: 'reg', component: RegistrationPageComponent}
   ]},
   {path: '',component: SiteLayoutComponent ,canActivate: [AuthGuard], children: [
-    { path: 'active', component : ActiveComponent},
+    { path: 'active', component: ActiveComponent},
     { path: 'home', component: HomeComponent },
     { path: 'search', component: SearchComponent },
     { path: 'profile', component: ProfileComponent },
