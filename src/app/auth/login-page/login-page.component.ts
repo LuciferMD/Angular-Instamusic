@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth-service';
 
 @Component({
@@ -7,24 +9,44 @@ import { AuthService } from 'src/app/shared/services/auth-service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit,OnDestroy {
 
   form: FormGroup;
+  aSub: Subscription;
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-   constructor(private auth:AuthService) {
-    }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      login: new FormControl(null,[Validators.required, Validators.minLength(5)]),
-      password: new FormControl(null, [Validators.required,Validators.minLength(5)])
+      login: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(5)])
     });
+
+    this.route.queryParams.subscribe((params: Params)=>{
+      if(params['registered']){
+        // Теперь вы можете зайти используя свои данные
+      }else if(params['accessDenied']){
+        //Для начало авторизуйтесь
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    if (this.aSub) {
+      this.aSub.unsubscribe(); 
+    }
   }
 
   onSubmit(){
-    this.auth.login(this.form.value.login,this.form.value.password).subscribe(
-      ()=>console.log('Login succes'),
+    this.form.disable()
+
+    this.aSub=this.auth.login(this.form.value).subscribe(
+      ()=>this.router.navigate(['/overview']),
       error => {console.warn(error);
+        this.form.enable();
       }
     )
   }

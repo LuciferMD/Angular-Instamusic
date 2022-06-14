@@ -18,7 +18,6 @@ import {
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/site-layout/site-layout.component';
 import { ConfigService } from './shared/services/config.service';
-import { ApiService } from './shared/services/api.service';
 import { AuthService } from './shared/services/auth-service';
 
 
@@ -63,7 +62,6 @@ const routes: Routes = [
   ],
   providers: [
 		ConfigService,
-    ApiService,
     AuthService,
 		{
 			provide: APP_INITIALIZER,
